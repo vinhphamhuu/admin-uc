@@ -1,0 +1,26 @@
+<h1 class="display-4">UC Users</h1>
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <div class="form-group">
+    <input name="id" #id="ngModel" [(ngModel)]="service.formData.id" class="form-control" placeholder="ID User" required>
+    <div *ngIf="id.invalid && id.touched" class="validation-error">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control" placeholder="Full name" required>
+    <div *ngIf="name.invalid && name.touched" class="validation-error">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <input name="phone" #phone="ngModel" [(ngModel)]="service.formData.phone" class="form-control" placeholder="Phone">
+    <div *ngIf="phone.invalid && phone.touched" class="validation-error">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <input name="level" #level="ngModel" [(ngModel)]="service.formData.level" class="form-control" placeholder="Level">
+    <ng-multiselect-dropdown [placeholder]="'Select level'" [data]="dropdownList"
+      [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+    </ng-multiselect-dropdown>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">CREATE</button>
+  </div>
+  <button ng-click="update()" class="btn btn-lg btn-block btn-info">UPDATE</button>
+</form>
