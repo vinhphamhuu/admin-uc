@@ -13,7 +13,6 @@
     <div *ngIf="phone.invalid && phone.touched" class="validation-error">This field is required.</div>
   </div>
   <div class="form-group">
-    <input name="level" #level="ngModel" [(ngModel)]="service.formData.level" class="form-control" placeholder="Level">
     <ng-multiselect-dropdown [placeholder]="'Select level'" [data]="dropdownList"
       [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
     </ng-multiselect-dropdown>
