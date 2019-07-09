@@ -12,45 +12,25 @@ import { log } from 'util';
 })
 export class UserComponent implements OnInit {
 
-
   constructor(private service: UsersService,
     private firestore: AngularFirestore,
     private toastr: ToastrService) { }
 
-    dropdownList = [];
-    selectedItems = [];
-    dropdownSettings = {};
 
-
+  selectedLevel = [];
+  leveList = [
+    { item_id: 0, name: 'safari' },
+    { item_id: 1, name: 'NOTEBOOK SAFARI 1' },
+    { item_id: 2, name: 'NOTEBOOK SAFARI 2' },
+    { item_id: 3, name: 'NOTEBOOK SAFARI 3' },
+    { item_id: 4, name: 'superkids' },
+    { item_id: 5, name: 'SUPERKIDS 1' },
+    { item_id: 6, name: 'SUPERKIDS 2' },
+    { item_id: 7, name: 'SUPERKIDS 3' },
+    { item_id: 8, name: 'SUPERKIDS 4' }
+  ];
   ngOnInit() {
     this.resetFormUser();
-
-    this.dropdownList = [
-      { item_id: 0, item_text: 'safari' },
-      { item_id: 1, item_text: 'NOTEBOOK SAFARI 1' },
-      { item_id: 2, item_text: 'NOTEBOOK SAFARI 2' },
-      { item_id: 3, item_text: 'NOTEBOOK SAFARI 3' },
-      { item_id: 4, item_text: 'superkids' },
-      { item_id: 5, item_text: 'SUPERKIDS 1' },
-      { item_id: 6, item_text: 'SUPERKIDS 2' },
-      { item_id: 7, item_text: 'SUPERKIDS 3' },
-      { item_id: 8, item_text: 'SUPERKIDS 4' }
-
-
-    ];
-    // this.selectedItems = [
-    //   { item_id: 3, item_text: 'Pune' },
-    //   { item_id: 4, item_text: 'Navsari' }
-    // ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: false
-    };
   }
   resetFormUser(form?: NgForm) {
     if (form != null)
@@ -60,19 +40,25 @@ export class UserComponent implements OnInit {
       name: '',
       phone: '',
       level: null,
+      checkChildren: false
     }
   }
   onSubmit(form: NgForm) {
     let data = Object.assign({}, form.value);
     console.log('user_new: ');
     console.log(data);
-    console.log(this.selectedItems);
-
+    console.log(this.selectedLevel);
+    var levels = [];
+    this.selectedLevel.forEach(element => {
+      console.log(element.name)
+      levels.push(element.name)
+    });
+    console.log(levels)
     console.log('---------------------');
     this.firestore.collection("users").doc(form.value.id).set({
       name: form.value.name,
       phone:  form.value.phone,
-      level:["safari", "super kids"]
+      level: levels
     })
       .then(function () {
         this.toastr.success('Submitted successfully', 'EMP. Register');
@@ -83,16 +69,5 @@ export class UserComponent implements OnInit {
     this.resetFormUser(form);
     //this.toastr.success('Submitted successfully', 'EMP. Register');
   }
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-    this.selectedItems.push(items.item_id,items.item_text);
-  }
-  update() {
-    console.log("update level - 5");
-    
-    this.firestore.collection('users').doc('5').collection('level').add({ 2: 'super kids' })
-  }
+
 }
