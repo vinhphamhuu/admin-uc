@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyC5ott6lp-gBqi6PrJxcyePZsBNTtGBqPY",
-    authDomain: "uc-admin-app.firebaseapp.com",
-    databaseURL: "https://uc-admin-app.firebaseio.com",
-    projectId: "uc-admin-app",
-    storageBucket: "uc-admin-app.appspot.com",
-    messagingSenderId: "447133315880",
-    appId: "1:447133315880:web:84e0899cf29bcf98"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
   }
 };
 
